@@ -1,11 +1,13 @@
 #!/bin/bash
 
 HOME="$(echo ~)"
+APPNAME=
+CONTAINER=
 
 set -e
 
-if [[ -n "$(docker ps -qaf 'name={CONTAINER}')" ]]; then
-	docker restart {CONTAINER}
+if [[ -n "$(docker ps -qaf 'name=$CONTAINER')" ]]; then
+	docker restart $CONTAINER
 else
 	USER_UID=$(id -u)
 	USER_GID=$(id -g)
@@ -16,9 +18,9 @@ else
 		--env=USER_UID=$USER_UID \
 		--env=USER_GID=$USER_GID \
 		--env=DISPLAY=unix$DISPLAY \
-		-v ${HOME}/docker/chrome-home:/home/chrome \
+		-v ${HOME}/docker/$APPNAME-home:/home/$APPNAME \
 		--volume=/tmp/.X11-unix:/tmp/.X11-unix:ro \
 		--volume=/run/user/$USER_UID/pulse:/run/pulse:ro \
-		--name APPNAME \
-		{CONTAINER}
+		--name $APPNAME \
+		$CONTAINER
 fi

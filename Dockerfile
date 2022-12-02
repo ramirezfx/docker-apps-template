@@ -31,7 +31,7 @@ RUN echo $LANG > /etc/locale.gen && \
      locales && \
      locale-gen $LANG || update-locale --reset LANG=$LANG
 
-ENV LANG de_AT.UTF-8
+ENV LANG=de_AT.UTF-8
 ENV TZ=Europe/Vienna
 
 ENV QT_GRAPHICSSYSTEM="native"

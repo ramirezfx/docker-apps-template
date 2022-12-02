@@ -6,4 +6,4 @@ echo "creating new $USER with UID $USERID"
 useradd -m $USER -u $USERID 
 chown -R $USER /home/$USER
 cd /home/$USER 
-su $USER -c "{Command To Execute}"
+su $USER -c "{EXECCOMMAND}"
